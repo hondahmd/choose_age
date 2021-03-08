@@ -10,7 +10,7 @@ import colors from '../colors';
 const styles = {
   indicator: {
     width: 4,
-    height: 40,
+    height: 50,
     backgroundColor: colors.primary,
     borderRadius: 2,
     position: 'absolute',
@@ -31,31 +31,29 @@ const styles = {
 const Slider = () => {
   const [current, setCurrent] = useState(0);
 
-  const range = Array(195).fill();
+  const range = Array(118).fill();
   for (let i = 0; i < range.length; i++) {
-    range[i] = i - 22;
+    range[i] = i - 9;
   }
 
   const renderMark = ({ item }) => {
     const showNumber = (item === 0 || (item - 8) % 10 === 0);
-    const show = item >= 0 && item <= 150;
+    const show = item >= 0 && item <= 100;
     return (
-      <View style={{ height: 40, justifyContent: 'center' }}>
+      <View style={{ width: 20, height: 60, justifyContent: 'center', alignItems: 'center' }}>
         <View style={{ height: 12 }}>
           {show && <View style={{ width: 2, height: showNumber ? 12 : 8, backgroundColor: colors.border }} />}
         </View>
+        {show && <View style={{ width: 20, height: 2, backgroundColor: colors.border }} />}
+        {show && showNumber && <Text style={{ position: 'absolute', top: 40 }}>{item}</Text>}
       </View>
     )
   }
 
   const onScroll = (val) => {
-    const displayNumber = Math.floor(val / 10);
-    setCurrent(val ? displayNumber + 1 : 0);
+    const displayNumber = Math.floor(val / 20);
+    setCurrent(val ? displayNumber : 0);
   }
-
-  const Seperator = () => (
-    <View style={{ width: 8, height: 40 }} />
-  )
 
   return (
     <View>
@@ -68,7 +66,6 @@ const Slider = () => {
           renderItem={renderMark}
           data={range}
           horizontal
-          ItemSeparatorComponent={() => <Seperator />}
           showsHorizontalScrollIndicator={false}
           onScroll={(e) => onScroll(e.nativeEvent.contentOffset.x)}
         />
