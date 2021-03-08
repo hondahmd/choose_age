@@ -4,6 +4,7 @@ import {
   Text,
   View
 } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import colors from '../colors';
 
@@ -14,7 +15,8 @@ const styles = {
     backgroundColor: colors.primary,
     borderRadius: 2,
     position: 'absolute',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    top: 10
   },
   bubble: {
     backgroundColor: colors.primaryVar,
@@ -24,8 +26,19 @@ const styles = {
     alignSelf: 'center',
     marginBottom: 8,
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+    top: 10
+  },
+  gradient: (rotateDeg) => ({
+    width: 40,
+    height: 40,
+    transform: [
+      { rotateZ: `${rotateDeg}deg` }
+    ],
+    position: 'absolute',
+    top: 130,
+    elevation: 1,
+  })
 }
 
 const Slider = () => {
@@ -57,6 +70,14 @@ const Slider = () => {
 
   return (
     <View>
+      <LinearGradient
+        colors={['rgb(255, 255, 255)', 'rgba(255, 255, 255, 0.6)', 'transparent']}
+        style={styles.gradient(-90)}
+      />
+      <LinearGradient
+        colors={['rgb(255, 255, 255)', 'rgba(255, 255, 255, 0.6)', 'transparent']}
+        style={[styles.gradient(90), { right: 0,  }]}
+      />
       <View style={styles.bubble}>
         <Text style={{ fontSize: 34, fontWeight: 'bold', color: colors.onBackground }}>{current}</Text>
       </View>
