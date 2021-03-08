@@ -13,7 +13,8 @@ const styles= {
     height: 80,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 20
   },
   processCount: {
     color: colors.onBackground,
